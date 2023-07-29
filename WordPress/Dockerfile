@@ -1,4 +1,3 @@
-
 FROM debian:buster
 
 # CMD ["./script.sh"]
@@ -6,11 +5,12 @@ FROM debian:buster
 
 # CMD ["./script.sh"]
 
-RUN mkdir -p /scripts
-COPY script.sh /scripts
-WORKDIR /scripts
-RUN chmod +x script.sh
-RUN ./script.sh
+COPY script.sh /usr/local/bin/script.sh
+
+RUN chmod +x /usr/local/bin/script.sh
+
+# Run the script
+CMD ["script.sh"]
 
 EXPOSE 9000
 
