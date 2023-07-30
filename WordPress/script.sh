@@ -9,6 +9,10 @@
 # mv wp-cli.phar /usr/local/bin/wp
 # wp core download --allow-root
 # php-fpm -F
+DB_CONT_NAME="TEST"
+DB_NAME="TEST"
+DB_USER="TEST"
+DB_PASS="TEST"
 
 apt-get update
 apt-get upgrade -y
@@ -17,6 +21,8 @@ apt-get install -y php7.3 php7.3-fpm php7.3-mysql default-mysql-client
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
+wp core download --allow-root
+wp config create --dbname=$DB_name --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=$DB_CONT_NAME  --allow-root
 mkdir /run/php #Creates a directory where PHP-FPM will store its socket file for handling FastCGI connections.
 php-fpm7.3 -F
 
