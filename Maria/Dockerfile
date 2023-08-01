@@ -2,8 +2,9 @@ FROM debian:buster
 
 RUN apt update && apt upgrade -y
 RUN apt install mariadb-server -y
-RUN service mysql start
+# RUN service mysql start
 COPY 50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+
 # RUN cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep "bind"
 COPY script.sh /usr/local/bin/script.sh
 
