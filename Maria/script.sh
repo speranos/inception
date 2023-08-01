@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# Update the package list and upgrade existing packages
-apt update
-apt upgrade -y
-
-# Install MariaDB
-apt install -y mariadb-server
-
-# Start MariaDB service
-service mysql start
-
 
 
 # Secure the MariaDB installation
@@ -20,7 +10,8 @@ service mysql start
 # reload the privilege tables. Follow the prompts to secure your installation.
 
 
-mysql -u root
+cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep "bind"
+# mysql -u root
 
 # Check the status of MariaDB to verify that it's running
 

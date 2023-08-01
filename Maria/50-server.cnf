@@ -1,0 +1,58 @@
+# Example MariaDB Configuration File
+
+[client]
+# The following username and password are used by client utilities (e.g., mysql, mysqldump).
+user = your_database_username
+password = your_database_password
+host = localhost
+
+[mysqld]
+# Server-specific settings
+
+# The TCP/IP port number on which the server listens (default is 3306)
+port = 3306
+
+# The socket file to use for local connections (default varies by system)
+socket = /var/run/mysqld/mysqld.sock
+
+# The data directory for the database (default varies by system)
+datadir = /var/lib/mysql
+
+# The server's default character set
+character-set-server = utf8mb4
+
+# Logging settings
+log-error = /var/log/mysql/error.log
+log_warnings = 2
+
+# Disallow root login remotely for security reasons
+skip-networking
+bind-address = 0.0.0.0
+
+# You can add more server settings here as needed.
+
+[mysqldump]
+# mysqldump specific settings
+
+# The following username and password are used by mysqldump when performing backups.
+user = your_backup_username
+password = your_backup_password
+
+# The character set to use for dumping data.
+# Ensure it matches the character set used by your database.
+default-character-set = utf8mb4
+
+# You can add more mysqldump settings here as needed.
+
+[mysql]
+# MySQL client settings
+
+# The following username and password are used by the MySQL command-line client.
+user = your_database_username
+password = your_database_password
+
+# The character set used by the MySQL client.
+# Ensure it matches the character set used by your database.
+default-character-set = utf8mb4
+
+# You can add more MySQL client settings here as needed.
