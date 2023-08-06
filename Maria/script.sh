@@ -15,11 +15,16 @@ service mysql start
 # chmod 777 /var/run/mysqld/mysqld.sock
 mysql -u root -e "CREATE DATABASE my_database;"
 mysql -u root -e "CREATE USER 'my_database_user'@0.0.0.0 IDENTIFIED BY 'password123'";
-mysql -u root -e "SELECT User FROM mysql.user;"
-mysql -u root -e "SHOW DATABASES;"
+# mysql -u root -e "SELECT User FROM mysql.user;"
+# mysql -u root -e "SHOW DATABASES;"
 mysql -u root -e "GRANT ALL PRIVILEGES ON my_database.* TO 'my_database_user'@0.0.0.0;"
-mysql -u root -e "SHOW GRANTS FOR 'my_database_user'@0.0.0.0;"
-ls /var/run/mysqld
+while true; do
+    echo "This is an infinite loop."
+    sleep 5   # Wait for 5 seconds before the next iteration
+done
+
+# mysql -u root -e "SHOW GRANTS FOR 'my_database_user'@0.0.0.0;"
+# ls /var/run/mysqld
 
 # Check the status of MariaDB to verify that it's running
 

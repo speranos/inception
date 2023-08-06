@@ -1,0 +1,38 @@
+# services:
+#   data_base:
+#     build: ./Maria
+#   word_press:
+#     build: ./WordPress
+#     environment:
+#       DB_DB_CONT_NAME: inception-data_base-1
+#       DB_DATABASE: my_database
+#       DB_USER: my_database_user
+#       DB_PASSWORD: password123
+#   web_sever:
+#     build: ./nginx
+#     ports:
+#       - "8080:400"
+
+version: '3'
+services:
+  data_base:
+    build: ./Maria
+    networks:
+      - bridge
+  word_press:
+    build: ./WordPress
+    environment:
+      DB_CONT_NAME: inception-data_base-1
+      DB_name: my_database
+      DB_USER: my_database_user
+      DB_PASS: password123
+    networks:
+      - bridge
+  web_sever:
+    build: ./nginx
+    ports:
+      - "8080:400"
+    networks:
+      - bridge
+networks:
+  bridge:
