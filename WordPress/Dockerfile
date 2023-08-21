@@ -1,18 +1,12 @@
 FROM debian:buster
 
-# CMD ["./script.sh"]
-# ADD script.sh /root/script.sh
-
-# CMD ["./script.sh"]
-
-COPY script.sh /usr/local/bin/script.sh
-
-RUN chmod +x /usr/local/bin/script.sh
-
-# ENV DB_HOST=inception-data_base-1
-
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install curl -y
+RUN apt-get install -y php7.3 php7.3-fpm php7.3-mysql default-mysql-client
+RUN mkdir /run/php
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
+RUN wp core download --allow-root
+COPY wp-config-sample.php ./wp-config-sample.php
 EXPOSE 9000
-# Run the script
-CMD ["script.sh"]
-
-
+CMD ["php-fpm7.3", "-F"]

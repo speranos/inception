@@ -31,7 +31,7 @@ services:
   web_sever:
     build: ./nginx
     ports:
-      - "8080:400"
+      - "1069:8080"
     networks:
       - bridge
 networks:
