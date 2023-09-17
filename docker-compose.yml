@@ -20,6 +20,8 @@ services:
     networks:
       - bridge
   word_press:
+    volumes:
+      - wd_v:/var/www/html
     build: ./WordPress
     environment:
       DB_CONT_NAME: inception-data_base-1
@@ -29,6 +31,8 @@ services:
     networks:
       - bridge
   web_sever:
+    volumes:
+      - wd_v:/var/www/html
     build: ./nginx
     ports:
       - "1069:8080"
@@ -36,3 +40,7 @@ services:
       - bridge
 networks:
   bridge:
+volumes:
+  wd_v:
+  dt_v:
+
