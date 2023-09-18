@@ -17,6 +17,11 @@ RUN chmod +x /usr/local/bin/script.sh
 # Run the script
 CMD ["script.sh"]
 
+
+
+
+
+
 # COPY wp-config-sample.php /var/www/html/wp-config-sample.php
 # RUN wp core download --allow-root
 # CMD ["php-fpm7.3", "-F"]

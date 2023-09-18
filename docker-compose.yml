@@ -16,6 +16,8 @@
 version: '3'
 services:
   data_base:
+    volumes:
+      - dt_v:/var/lib/mysql
     build: ./Maria
     networks:
       - bridge
@@ -24,10 +26,10 @@ services:
       - wd_v:/var/www/html
     build: ./WordPress
     environment:
-      DB_CONT_NAME: inception-data_base-1
-      DB_name: my_database
+      DB_NAME: my_database
       DB_USER: my_database_user
       DB_PASS: password123
+      DB_CONT_NAME: inception-data_base-1:3306
     networks:
       - bridge
   web_sever:
@@ -42,5 +44,15 @@ networks:
   bridge:
 volumes:
   wd_v:
+    driver: local
+    driver_opts:
+        o: bind
+        type: none
+        device: /Users/enima/Desktop/inception/wd_volume/
   dt_v:
+    driver: local
+    driver_opts:
+        o: bind
+        type: none
+        device: /Users/enima/Desktop/inception/dt_volume/
 

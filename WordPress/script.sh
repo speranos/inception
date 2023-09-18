@@ -19,7 +19,7 @@ echo "listen=9000" >> /etc/php/7.3/fpm/pool.d/www.conf
 wp core download --allow-root
 
 # Create wp-config.php
-# wp config create --dbname={$DB_NAME} --dbuser={$DB_USER} --dbpass={$DB_PASS} --dbhost={$DB_CONT_NAME} --allow-root
+wp config create --dbname={$DB_NAME} --dbuser={$DB_USER} --dbpass={$DB_PASS} --dbhost=$DB_CONT_NAME --allow-root
 
 # # Create a directory for PHP-FPM socket
 

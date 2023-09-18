@@ -12,6 +12,6 @@ COPY script.sh /usr/local/bin/script.sh
 
 # # Give execute permission to the script
 RUN chmod +x /usr/local/bin/script.sh
-
+EXPOSE 3306
 # Run the script
 CMD ["script.sh"]
