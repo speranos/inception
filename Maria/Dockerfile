@@ -1,7 +1,7 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt update && apt upgrade -y
-RUN apt install mariadb-server -y
+RUN apt install mariadb-server sudo -y
 # RUN service mysql start
 RUN rm /etc/mysql/mariadb.conf.d/50-server.cnf
 
@@ -12,6 +12,8 @@ COPY script.sh /usr/local/bin/script.sh
 
 # # Give execute permission to the script
 RUN chmod +x /usr/local/bin/script.sh
-EXPOSE 3306
+
+RUN /usr/local/bin/script.sh
+
 # Run the script
-CMD ["script.sh"]
+CMD ["mariadbd"]

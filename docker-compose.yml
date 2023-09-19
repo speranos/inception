@@ -15,33 +15,43 @@
 
 version: '3'
 services:
-  data_base:
+  mariadb:
+    container_name: mariadb
     volumes:
       - dt_v:/var/lib/mysql
     build: ./Maria
     networks:
-      - bridge
-  word_press:
-    volumes:
-      - wd_v:/var/www/html
-    build: ./WordPress
+      - bridgeeeee
     environment:
       DB_NAME: my_database
       DB_USER: my_database_user
       DB_PASS: password123
-      DB_CONT_NAME: inception-data_base-1:3306
+      DB_CONT_NAME: mariadb
+  wordpress:
+    container_name: wordpress
+    env_file: .env
+    depends_on:
+      - mariadb
+    volumes:
+      - wd_v:/var/www/html
+    build: ./WordPress
     networks:
-      - bridge
-  web_sever:
+      - bridgeeeee
+  nginx:
+    container_name: nginx
+    depends_on:
+      - wordpress
     volumes:
       - wd_v:/var/www/html
     build: ./nginx
     ports:
       - "1069:8080"
     networks:
-      - bridge
+      - bridgeeeee
 networks:
-  bridge:
+  bridgeeeee:
+    driver: bridge
+
 volumes:
   wd_v:
     driver: local

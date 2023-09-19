@@ -11,17 +11,17 @@
 
 
 # cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep "bind"
-service mysql start
+sudo service mariadb start
 # chmod 777 /var/run/mysqld/mysqld.sock
-mysql -u root -e "CREATE DATABASE my_database;"
-mysql -u root -e "CREATE USER 'my_database_user'@0.0.0.0 IDENTIFIED BY 'password123'";
-# mysql -u root -e "SELECT User FROM mysql.user;"
-# mysql -u root -e "SHOW DATABASES;"
-mysql -u root -e "GRANT ALL PRIVILEGES ON my_database.* TO 'my_database_user'@0.0.0.0;"
-while true; do
-    echo "This is an infinite loop."
-    sleep 5   # Wait for 5 seconds before the next iteration
-done
+mariadb -u root -e "CREATE DATABASE my_database;"
+mariadb -u root -e "CREATE USER 'my_database_user'@0.0.0.0 IDENTIFIED BY 'password123'";
+# mariadb -u root -e "SELECT User FROM mariadb.user;"
+# mariadb -u root -e "SHOW DATABASES;"
+mariadb -u root -e "GRANT ALL PRIVILEGES ON my_database.* TO 'my_database_user'@0.0.0.0;"
+# while true; do
+#     echo "This is an infinite loop."
+#     sleep 5   # Wait for 5 seconds before the next iteration
+# done
 
 # mysql -u root -e "SHOW GRANTS FOR 'my_database_user'@0.0.0.0;"
 # ls /var/run/mysqld
