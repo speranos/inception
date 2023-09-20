@@ -18,22 +18,18 @@ services:
   mariadb:
     container_name: mariadb
     volumes:
-      - dt_v:/var/lib/mysql
+      - mariadb_volume:/var/lib/mysql
     build: ./Maria
     networks:
       - bridgeeeee
-    environment:
-      DB_NAME: my_database
-      DB_USER: my_database_user
-      DB_PASS: password123
-      DB_CONT_NAME: mariadb
+    env_file: .env
   wordpress:
     container_name: wordpress
     env_file: .env
     depends_on:
       - mariadb
     volumes:
-      - wd_v:/var/www/html
+      - wordpress_volume:/var/www/html
     build: ./WordPress
     networks:
       - bridgeeeee
@@ -42,27 +38,28 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wd_v:/var/www/html
+      - wordpress_volume:/var/www/html
     build: ./nginx
     ports:
       - "1069:8080"
     networks:
       - bridgeeeee
+
 networks:
   bridgeeeee:
     driver: bridge
 
 volumes:
-  wd_v:
-    driver: local
-    driver_opts:
-        o: bind
-        type: none
-        device: /Users/enima/Desktop/inception/wd_volume/
-  dt_v:
-    driver: local
-    driver_opts:
-        o: bind
-        type: none
-        device: /Users/enima/Desktop/inception/dt_volume/
 
+  mariadb_volume:
+    driver: local
+    driver_opts:
+        o: bind
+        type: none
+        device: /nfs/homes/aoueldma/Desktop/inception/dt_volume
+  wordpress_volume:
+    driver: local
+    driver_opts:
+        o: bind
+        type: none
+        device: /nfs/homes/aoueldma/Desktop/inception/wd_volume
