@@ -15,6 +15,7 @@
 
 version: '3'
 services:
+
   mariadb:
     container_name: mariadb
     volumes:
@@ -23,6 +24,8 @@ services:
     networks:
       - bridgeeeee
     env_file: .env
+
+  
   wordpress:
     container_name: wordpress
     env_file: .env
@@ -33,6 +36,9 @@ services:
     build: ./WordPress
     networks:
       - bridgeeeee
+
+
+
   nginx:
     container_name: nginx
     depends_on:
@@ -45,6 +51,8 @@ services:
     networks:
       - bridgeeeee
 
+
+
 networks:
   bridgeeeee:
     driver: bridge
@@ -56,10 +64,10 @@ volumes:
     driver_opts:
         o: bind
         type: none
-        device: /nfs/homes/aoueldma/Desktop/inception/dt_volume
+        device: /Users/enima/Desktop/inception/dt_volume
   wordpress_volume:
     driver: local
     driver_opts:
         o: bind
         type: none
-        device: /nfs/homes/aoueldma/Desktop/inception/wd_volume
+        device: /Users/enima/Desktop/inception/wd_volume

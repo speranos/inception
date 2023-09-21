@@ -12,7 +12,7 @@
 
 # cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep "bind"
 sudo service mariadb start
-sleep 3
+# sleep 3
 # chmod 777 /var/run/mysqld/mysqld.sock
 mariadb -u root -e "CREATE DATABASE my_database;"
 mariadb -u root -e "CREATE USER 'my_database_user'@'%' IDENTIFIED BY 'password123'";
