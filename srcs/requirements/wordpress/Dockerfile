@@ -9,14 +9,14 @@ RUN mkdir /run/php
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 EXPOSE 9000
-# RUN cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep "bind"
+ARG DB_CONT_NAME DB_NAME DB_USER DB_PASS
 COPY script.sh /usr/local/bin/script.sh
-
-# # Give execute permission to the script
 RUN chmod +x /usr/local/bin/script.sh
+# RUN script.sh
 
-# Run the script
-CMD ["script.sh"]
+# CMD ["php-fpm7.4 -F"]
+
+CMD [ "script.sh" ]
 
 
 

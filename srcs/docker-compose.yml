@@ -1,29 +1,19 @@
-# services:
-#   data_base:
-#     build: ./Maria
-#   word_press:
-#     build: ./WordPress
-#     environment:
-#       DB_DB_CONT_NAME: inception-data_base-1
-#       DB_DATABASE: my_database
-#       DB_USER: my_database_user
-#       DB_PASSWORD: password123
-#   web_sever:
-#     build: ./nginx
-#     ports:
-#       - "8080:400"
-
 version: '3'
 services:
 
   mariadb:
     container_name: mariadb
+    env_file: .env
     volumes:
       - mariadb_volume:/var/lib/mysql
-    build: ./Maria
+    build:
+      context: ./requirements/mariadb
+      args:
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_PASS: ${DB_PASS}
     networks:
       - bridgeeeee
-    env_file: .env
 
   
   wordpress:
@@ -33,7 +23,7 @@ services:
       - mariadb
     volumes:
       - wordpress_volume:/var/www/html
-    build: ./WordPress
+    build: ./requirements/wordpress
     networks:
       - bridgeeeee
 
@@ -45,9 +35,9 @@ services:
       - wordpress
     volumes:
       - wordpress_volume:/var/www/html
-    build: ./nginx
+    build: ./requirements/nginx
     ports:
-      - "1069:8080"
+      - "443:443"
     networks:
       - bridgeeeee
 
@@ -64,10 +54,11 @@ volumes:
     driver_opts:
         o: bind
         type: none
-        device: /Users/enima/Desktop/inception/dt_volume
+        device: /home/debian/Desktop/inception/dt_volume
+
   wordpress_volume:
     driver: local
     driver_opts:
         o: bind
         type: none
-        device: /Users/enima/Desktop/inception/wd_volume
+        device: /home/debian/Desktop/inception/wd_volume
