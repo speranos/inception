@@ -13,7 +13,7 @@ services:
         DB_USER: ${DB_USER}
         DB_PASS: ${DB_PASS}
     networks:
-      - bridgeeeee
+      - ContNet
 
   
   wordpress:
@@ -25,7 +25,7 @@ services:
       - wordpress_volume:/var/www/html
     build: ./requirements/wordpress
     networks:
-      - bridgeeeee
+      - ContNet
 
 
 
@@ -39,12 +39,12 @@ services:
     ports:
       - "443:443"
     networks:
-      - bridgeeeee
+      - ContNet
 
 
 
 networks:
-  bridgeeeee:
+  ContNet:
     driver: bridge
 
 volumes:
