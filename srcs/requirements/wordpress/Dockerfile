@@ -8,21 +8,7 @@ RUN apt-get install -y mariadb-client
 RUN mkdir /run/php
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
-EXPOSE 9000
-ARG DB_CONT_NAME DB_NAME DB_USER DB_PASS
 COPY script.sh /usr/local/bin/script.sh
 RUN chmod +x /usr/local/bin/script.sh
-# RUN script.sh
-
-# CMD ["php-fpm7.4 -F"]
 
 CMD [ "script.sh" ]
-
-
-
-
-
-
-# COPY wp-config-sample.php /var/www/html/wp-config-sample.php
-# RUN wp core download --allow-root
-# CMD ["php-fpm7.3", "-F"]
