@@ -15,7 +15,6 @@ services:
     networks:
       - ContNet
 
-  
   wordpress:
     container_name: wordpress
     env_file: .env
@@ -26,7 +25,6 @@ services:
     build: ./requirements/wordpress
     networks:
       - ContNet
-
 
 
   nginx:
@@ -42,7 +40,6 @@ services:
       - ContNet
 
 
-
 networks:
   ContNet:
     driver: bridge
@@ -54,11 +51,10 @@ volumes:
     driver_opts:
         o: bind
         type: none
-        device: /home/debian/Desktop/inception/dt_volume
-
+        device: /home/aoueldma/data/dt_volume/
   wordpress_volume:
     driver: local
     driver_opts:
         o: bind
         type: none
-        device: /home/debian/Desktop/inception/wd_volume
+        device: /home/aoueldma/data/wd_volume/
